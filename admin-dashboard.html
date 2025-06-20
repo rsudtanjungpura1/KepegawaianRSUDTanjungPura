@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard - RSUD Tanjung Pura</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    body {
+      background: #f8fafc;
+    }
+    .sidebar {
+      min-width: 320px;
+      max-width: 320px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      left: 0;
+      z-index: 1040;
+      background: #009B4C !important;
+    }
+    .admin-card {
+      border-radius: 16px;
+      box-shadow: 0 2px 10px 0 rgba(0,155,76,0.06);
+      border: 1px solid #e0eae3;
+      background: #fff;
+      padding: 24px 20px 16px 20px;
+      margin-bottom: 28px;
+    }
+    .admin-summary {
+      font-weight: 600;
+      color: #009B4C;
+      font-size: 1.1em;
+    }
+    .admin-section-title {
+      font-weight: 700;
+      color: #009B4C;
+      margin-bottom: 16px;
+      font-size: 1.2em;
+      letter-spacing: 0.01em;
+    }
+    .table thead th {
+      background: #e6faef;
+      color: #009B4C;
+    }
+    .table thead, .table th, .table td {
+      vertical-align: middle !important;
+    }
+    .status-badge {
+      font-size: .92em;
+      font-weight: 600;
+      padding: 0.35em 1em;
+      border-radius: 12px;
+    }
+    .status-proses { background: #ffeeba; color: #856404; }
+    .status-selesai { background: #d4edda; color: #155724; }
+    .status-ditolak { background: #f8d7da; color: #721c24; }
+    .status-aktif { background: #e6faef; color: #009B4C; }
+    .status-nonaktif { background: #f8d7da; color: #721c24; }
+    .user-img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #eee;
+    }
+    @media (max-width: 900px) {
+      .sidebar {
+        min-width: 100vw !important;
+        max-width: 100vw !important;
+        width: 100vw !important;
+        position: static;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <nav class="sidebar px-3 py-4">
+      <div class="text-center mb-4">
+        <img src="assets/img/rsud1.png" alt="Logo RSUD" width="55" class="mb-2">
+        <h4 class="fw-bold text-white">ADMIN PANEL</h4>
+        <hr class="border-light" />
+      </div>
+      <ul class="nav flex-column mb-3">
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white fw-semibold" href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" href="#pegawai"><i class="bi bi-people"></i> Data Pegawai</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" href="#layanan"><i class="bi bi-card-checklist"></i> Pengajuan Layanan</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" href="#pengumuman"><i class="bi bi-megaphone"></i> Pengumuman</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link text-white" href="#faq"><i class="bi bi-question-circle"></i> FAQ</a>
+        </li>
+      </ul>
+      <div class="mt-5 text-center">
+        <a href="login.html" class="btn btn-outline-light btn-sm">Keluar Admin</a>
+      </div>
+    </nav>
+    <!-- /Sidebar -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper" class="flex-grow-1">
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand navbar-light bg-white shadow-sm mb-4">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h5">Admin Dashboard</span>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <span class="nav-link fw-semibold text-success">
+                <i class="bi bi-person-badge"></i> Admin RSUD Tanjung Pura
+              </span>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!-- /Topbar -->
+
+      <div class="container-fluid">
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <div class="admin-card text-center">
+              <div class="admin-summary">Total Pegawai</div>
+              <div class="display-5 fw-bold">215</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="admin-card text-center">
+              <div class="admin-summary">Pengajuan Proses</div>
+              <div class="display-5 fw-bold text-warning">12</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="admin-card text-center">
+              <div class="admin-summary">Pengajuan Selesai</div>
+              <div class="display-5 fw-bold text-success">48</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="admin-card text-center">
+              <div class="admin-summary">Pengajuan Ditolak</div>
+              <div class="display-5 fw-bold text-danger">3</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Pegawai -->
+        <div class="admin-section-title mb-2" id="pegawai">Data Pegawai (Terbaru)</div>
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Foto</th>
+                    <th>Nama</th>
+                    <th>NIP</th>
+                    <th>Jabatan</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><img src="assets/img/user.png" alt="user" class="user-img"></td>
+                    <td>Ahmad Pratama</td>
+                    <td>19800101 202001 1 001</td>
+                    <td>Analis Kepegawaian Ahli Muda</td>
+                    <td><span class="status-badge status-aktif">Aktif</span></td>
+                    <td>
+                      <a href="profil.html" class="btn btn-sm btn-outline-success">Lihat</a>
+                      <a href="#" class="btn btn-sm btn-outline-danger">Nonaktifkan</a>
+                    </td>
+                  </tr>
+                  <!-- Tambahkan data pegawai lain -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Pengajuan Layanan -->
+        <div class="admin-section-title mb-2" id="layanan">Pengajuan Layanan (Terkini)</div>
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Nama Pegawai</th>
+                    <th>Layanan</th>
+                    <th>Tanggal</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Ahmad Pratama</td>
+                    <td>Cuti Tahunan</td>
+                    <td>2025-06-19</td>
+                    <td><span class="status-badge status-proses">Proses</span></td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-outline-primary">Detail</a>
+                      <a href="#" class="btn btn-sm btn-outline-success">Selesaikan</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Sri Lestari</td>
+                    <td>Kenaikan Pangkat</td>
+                    <td>2025-06-18</td>
+                    <td><span class="status-badge status-selesai">Selesai</span></td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-outline-primary">Detail</a>
+                    </td>
+                  </tr>
+                  <!-- Tambahkan data pengajuan lain -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pengumuman -->
+        <div class="admin-section-title mb-2" id="pengumuman">Pengumuman</div>
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Judul</th>
+                    <th>Tanggal</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Perubahan Jadwal Cuti 2025</td>
+                    <td>2025-06-19</td>
+                    <td><span class="status-badge status-aktif">Aktif</span></td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-outline-primary">Edit</a>
+                      <a href="#" class="btn btn-sm btn-outline-danger">Hapus</a>
+                    </td>
+                  </tr>
+                  <!-- Tambahkan data pengumuman lain -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="admin-section-title mb-2" id="faq">FAQ</div>
+        <div class="card shadow-sm border-0 mb-5">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Pertanyaan</th>
+                    <th>Jawaban (singkat)</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Bagaimana cara mengajukan cuti?</td>
+                    <td>Masuk menu Layanan > Cuti, isi formulir...</td>
+                    <td><span class="status-badge status-aktif">Aktif</span></td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-outline-primary">Edit</a>
+                      <a href="#" class="btn btn-sm btn-outline-danger">Hapus</a>
+                    </td>
+                  </tr>
+                  <!-- Tambahkan data FAQ lain -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /container-fluid -->
+    </div>
+    <!-- /Page Content -->
+  </div>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
